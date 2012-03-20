@@ -1,12 +1,7 @@
-#### A simple example
-
-
-
-```
-/home/abdul/objectlabs/dargparse/hello-dargparse
-
 #!/usr/bin/env python
 
+
+__author__ = 'abdul'
 
 import dargparse
 import sys
@@ -17,7 +12,6 @@ from dargparse import dargparse
 from datetime import  datetime
 
 # Define your parse dictionary
-
 HELLO_PARSER ={
     "prog": "hello-dargparse",
     "description" : "This is hello world dargparse example",
@@ -52,7 +46,7 @@ HELLO_PARSER ={
 # MAIN
 ###############################################################################
 def main(args):
-    # build the parse object
+# build the parse object
     helloDargParser = dargparse.build_parser(HELLO_PARSER)
 
     # parse the command line
@@ -82,64 +76,3 @@ if __name__ == '__main__':
             raise
     except:
         traceback.print_exc()
-
-
-```
-
-Execute your example
-
-```
-[abdul:~/objectlabs/dargparse] ./hello-dargeparse
-Usage: hello-dargparse [<options>] yourName
-
-This is hello world dargparse example
-
-Options:
-  -h, --help       show this help message and exit
-  -d, --printDate  print the current date
-
-
-[abdul:~/objectlabs/dargparse] ./hello-dargeparse abdul
-Hello abdul!
-
-
-[abdul:~/objectlabs/dargparse] ./hello-dargeparse -d abdul
-Hello abdul! the time now is 2012-03-20 00:32:04.129220
-
-
-[abdul:~/objectlabs/dargparse] ./hello-dargeparse -printDate abdul
-unrecognized arguments: -printDate
-Usage: hello-dargparse [<options>] yourName
-see 'hello-dargparse --help' for detailed options
-
-[abdul:~/objectlabs/dargparse] ./hello-dargeparse -blah bloh
-unrecognized arguments: -blah
-Usage: hello-dargparse [<options>] yourName
-see 'hello-dargparse --help' for detailed options%
-
-```
-
-Requirements
---------------------
-
-* Python >= 2.7
-* pip >= 1.0.2
-   + Download: http://pypi.python.org/pypi/pip#downloads
-   + Operating instructions: http://www.pip-installer.org/en/latest/index.html
-   + Installation instructions: http://www.pip-installer.org/en/latest/index.html
-
-Installing pip from git is the easiest:
-
-```
-% git clone https://github.com/pypa/pip.git
-% cd pip
-% python setup.py install # may need to be root or need to use sudo
-```
-
-Installing
---------------------
-
-```
-% git clone git@github.com:objectlabs/dargparse.git
-% sudo pip install ./dargparse
-```
