@@ -20,6 +20,7 @@ HELLO_PARSER ={
             "name": "yourName",
             "type" : "positional",
             "help": "Your name",
+            "metavar" : "<YOUR NAME>",
             "nargs": 1
         },
         {

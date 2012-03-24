@@ -93,11 +93,14 @@ def _setup_parser_args(parser, arguments):
 
 ###############################################################################
 def make_arg_kwargs(arg_def):
-    kwargs = {"help" : get_document_property(arg_def, "help", "")}
-
     argname = get_arg_name(arg_def)
-    cmd_arg = get_cmd_arg(arg_def)
+    kwargs = {"help": get_document_property(arg_def, "help", "")}
 
+    metavar = get_document_property(arg_def, "metavar")
+    if metavar is not None:
+        kwargs["metavar"] = metavar
+
+    cmd_arg = get_cmd_arg(arg_def)
 
     if (cmd_arg is not None and
         argname not in listify(cmd_arg)):
@@ -239,7 +242,7 @@ class DargeParser(ArgumentParser):
     ###########################################################################
     def _make_usage(self):
         optionals = "[<options>]" if self.has_optional_args() else ""
-        positionals = " ".join(self.get_positional_arg_names())
+        positionals = " ".join(self.get_positional_arg_metavars())
 
         return "Usage: %s %s %s" % (self.prog,
                                     optionals,
@@ -351,6 +354,11 @@ class DargeParser(ArgumentParser):
             lambda arg_def: get_arg_name(arg_def), self.get_positional_args())
 
     ###########################################################################
+    def get_positional_arg_metavars(self):
+        return map(
+            lambda arg_def: get_arg_metavar(arg_def),
+            self.get_positional_args())
+    ###########################################################################
     def get_parent_dargeparser(self):
         return self.parent_dargeparser
 
@@ -388,6 +396,10 @@ def get_cmd_arg(arg_def):
         cmd_arg = get_arg_name(arg_def)
 
     return cmd_arg
+
+###############################################################################
+def get_arg_metavar(arg_def):
+    return get_document_property(arg_def, "metavar", get_arg_name(arg_def))
 
 ###############################################################################
 # Dargeparse Exception class
