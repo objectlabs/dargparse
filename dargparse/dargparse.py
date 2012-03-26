@@ -241,10 +241,10 @@ class DargeParser(ArgumentParser):
 
     ###########################################################################
     def _make_usage(self):
-        optionals = "[<options>]" if self.has_optional_args() else ""
+        optionals = "[<options>] " if self.has_optional_args() else ""
         positionals = " ".join(self.get_positional_arg_metavars())
 
-        return "Usage: %s %s %s" % (self.prog,
+        return "Usage: %s %s%s" % (self.prog,
                                     optionals,
                                     positionals)
 
