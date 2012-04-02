@@ -144,6 +144,5 @@ Installing
 --------------------
 
 ```
-% git clone git@github.com:objectlabs/dargparse.git
-% sudo pip install ./dargparse
+ sudo pip install -e "git+git@github.com:objectlabs/dargparse.git#egg=dargparse"
 ```
