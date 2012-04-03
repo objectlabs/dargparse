@@ -19,6 +19,7 @@ __author__ = 'abdul'
 
 import string
 import types
+import sys
 
 from argparse import ArgumentParser
 from argparse import ArgumentError
@@ -75,7 +76,7 @@ def setup_parser(parser, parser_def):
     if func is not None:
         # check of func is a fully qualified function name and eval it
         if type(func) is types.StringType:
-            func = eval(func)
+            func = resolve_function(func)
 
         if callable(func):
             parser.set_defaults(func=func)
@@ -427,3 +428,14 @@ def get_document_property(document, name, default=None):
         return document[name]
     else:
         return default
+
+###############################################################################
+def resolve_function(full_func_name):
+    names = full_func_name.split(".")
+    module_name = names[0]
+    module_obj = sys.modules[module_name]
+    result = module_obj
+    for name in names[1:]:
+        result = getattr(result, name)
+
+    return result
