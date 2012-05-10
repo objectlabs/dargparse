@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='dargparse',
@@ -8,6 +8,7 @@ setup(
     description='Declarative command-line argument parser for python',
     long_description="Declarative command-line argument parser for python",
     packages=['dargparse'],
+    test_suite="dargparse.tests.test_suite",
     url='http://objectlabs.org',
     license='LICENSE.txt',
     install_requires=[
