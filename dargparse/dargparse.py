@@ -105,9 +105,9 @@ def make_arg_kwargs(arg_def):
     argname = get_arg_name(arg_def)
     kwargs = {"help": get_document_property(arg_def, "help", "")}
 
-    metavar = get_document_property(arg_def, "metavar")
-    if metavar is not None:
-        kwargs["metavar"] = metavar
+    display_name = get_document_property(arg_def, "displayName")
+    if display_name is not None:
+        kwargs["metavar"] = display_name
 
     cmd_arg = get_cmd_arg(arg_def)
 
@@ -251,7 +251,7 @@ class DargeParser(ArgumentParser):
     ###########################################################################
     def _make_usage(self):
         optionals = "[<options>] " if self.has_optional_args() else ""
-        positionals = " ".join(self.get_positional_arg_metavars())
+        positionals = " ".join(self.get_positional_arg_display_names())
 
         return "Usage: %s %s%s" % (self.prog,
                                     optionals,
@@ -363,9 +363,9 @@ class DargeParser(ArgumentParser):
             lambda arg_def: get_arg_name(arg_def), self.get_positional_args())
 
     ###########################################################################
-    def get_positional_arg_metavars(self):
+    def get_positional_arg_display_names(self):
         return map(
-            lambda arg_def: get_arg_metavar(arg_def),
+            lambda arg_def: get_arg_display_name(arg_def),
             self.get_positional_args())
     ###########################################################################
     def get_parent_dargeparser(self):
@@ -407,8 +407,8 @@ def get_cmd_arg(arg_def):
     return cmd_arg
 
 ###############################################################################
-def get_arg_metavar(arg_def):
-    return get_document_property(arg_def, "metavar", get_arg_name(arg_def))
+def get_arg_display_name(arg_def):
+    return get_document_property(arg_def, "displayName", get_arg_name(arg_def))
 
 ###############################################################################
 # Dargeparse Exception class
