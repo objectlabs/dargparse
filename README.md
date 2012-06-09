@@ -144,5 +144,5 @@ Installing
 --------------------
 
 ```
- sudo pip install "git+ssh://git@github.com/objectlabs/dargparse.git#egg=dargparse-0.1.0"
+ sudo pip install dargparse
 ```
