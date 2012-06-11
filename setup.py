@@ -26,13 +26,13 @@ from setuptools import setup
 setup(
     name='dargparse',
     version='0.1.0',
-    author='The Mongolab team',
+    author='The MongoLab Team',
     author_email='team@mongolab.com',
     description='Declarative command-line argument parser for python',
     long_description="Declarative command-line argument parser for python",
     packages=['dargparse'],
     test_suite="dargparse.tests.test_suite",
-    url='http://mongolab.com',
+    url='https://github.com/objectlabs/dargparse',
     license='LICENSE.txt',
     install_requires=[
         'argparse==1.2.1'
