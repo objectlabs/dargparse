@@ -33,7 +33,7 @@ setup(
     packages=['dargparse'],
     test_suite="dargparse.tests.test_suite",
     url='https://github.com/objectlabs/dargparse',
-    license='LICENSE.txt',
+    license='MIT',
     install_requires=[
         'argparse==1.2.1'
     ]
