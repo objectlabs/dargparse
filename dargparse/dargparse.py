@@ -206,6 +206,7 @@ class DargeParser(ArgumentParser):
     def print_help(self, file=None):
         print self.get_usage() + '\n'
         print self.description + '\n'
+        print self.get_positionals_help()
         print self.get_options_help()
         print self._make_epilog()
 
@@ -294,14 +295,30 @@ class DargeParser(ArgumentParser):
         return epilog
 
     ###########################################################################
+    def get_positionals_help(self):
+        formatter = self._get_formatter()
+        positional_actions = self._get_positional_actions()
+        if positional_actions:
+            formatter._indent()
+            for action in positional_actions:
+                formatter.add_argument(action)
+
+            return "Arguments:\n%s" % formatter.format_help()
+        else:
+            return ""
+
+    ###########################################################################
     def get_options_help(self):
         formatter = self._get_formatter()
         optional_actions = self._get_optional_actions()
-        formatter._indent()
-        for action in optional_actions:
-            formatter.add_argument(action)
+        if optional_actions:
+            formatter._indent()
+            for action in optional_actions:
+                formatter.add_argument(action)
 
-        return "Options:\n%s" % formatter.format_help()
+            return "Options:\n%s" % formatter.format_help()
+        else:
+            return ""
 
     ###########################################################################
     def _get_child_groups(self):
