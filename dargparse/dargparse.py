@@ -211,8 +211,8 @@ class DargeParser(ArgumentParser):
         print self._make_epilog()
 
     ###########################################################################
-    def parse_args(self, args=None, namespace=None):
-        args, argv = self.parse_known_args(args, namespace)
+    def parse_args(self, raw_args=None, namespace=None):
+        args, argv = self.parse_known_args(raw_args, namespace)
         if argv:
             argv_str = ' '.join(argv)
             full_prog = self.get_errored_parser().get_full_prog()
@@ -222,6 +222,14 @@ class DargeParser(ArgumentParser):
                     "\n" + details_msg)
 
             self.error(msg)
+
+        # add additional information
+        args.raw_args = raw_args
+        def is_arg_specified(arg_name):
+            return arg_name in raw_args
+
+        args.is_arg_specified = is_arg_specified
+
         return args
 
     ###########################################################################
