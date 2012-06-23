@@ -304,6 +304,12 @@ class DargeParser(ArgumentParser):
 
     ###########################################################################
     def get_positionals_help(self):
+
+        # if this is the root parser then positionals help == children help
+        # which is done in _make_children_epilog
+        if self.parent_dargeparser is None:
+            return ""
+
         formatter = self._get_formatter()
         positional_actions = self._get_positional_actions()
         if positional_actions:
