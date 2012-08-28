@@ -286,6 +286,10 @@ class DargeParser(ArgumentParser):
             group_children = self.get_child_definitions_by_group(
                 child_group['name'])
 
+            # filter out hidden children
+            group_children = filter(lambda child:
+                                           not is_hidden_definition(child),
+                                    group_children)
             command_list = map(_make_child_epilog ,group_children)
 
             command_list_string = "\n    ".join(command_list)
@@ -414,6 +418,10 @@ DEFAULT_CHILD_GROUP = {
     "name" :"allCommands",
     "display": ""
 }
+
+###############################################################################
+def is_hidden_definition(definition):
+    return "hidden" in definition and definition["hidden"]
 
 ###############################################################################
 #  Arg Definition Functions
