@@ -117,6 +117,7 @@ def make_arg_kwargs(arg_def):
 
     nargs = get_document_property(arg_def, "nargs")
     action = get_document_property(arg_def, "action")
+    arg_type = get_document_property(arg_def, "arg_type")
 
     if nargs is not None:
         if nargs == 0:
@@ -126,6 +127,9 @@ def make_arg_kwargs(arg_def):
 
     if action is not None:
         kwargs["action"] = action
+
+    if arg_type is not None:
+        kwargs["type"] = arg_type
 
     default = get_document_property(arg_def, "default")
 
