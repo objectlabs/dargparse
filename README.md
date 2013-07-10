@@ -43,6 +43,18 @@ HELLO_PARSER ={
             "nargs": 0,
             "action": "store_true",
             "default": False
+        },
+        {
+            "name": "repeat",
+            "type" : "optional",
+            "help": "repeat for N times",
+            "cmd_arg": [
+                "-r",
+                "--repeat"
+            ],
+            "nargs": 1,
+            "default": 1,
+            "valueType": int,
         }
 
     ]
@@ -64,9 +76,11 @@ def main(args):
     parsed_options = helloDargParser.parse_args(args)
     now = datetime.now()
     if parsed_options.printDate:
-        print "Hello %s! the time now is %s" % (parsed_options.yourName,now)
+        msg = "Hello %s! the time now is %s" % (parsed_options.yourName,now)
     else:
-        print "Hello %s!" % (parsed_options.yourName)
+        msg = "Hello %s!" % (parsed_options.yourName)
+    print '\n'.join([msg] * parsed_options.repeat)
+
 
 ###############################################################################
 ########################                   ####################################
@@ -109,6 +123,12 @@ Hello abdul!
 
 [abdul:~/objectlabs/dargparse] ./hello-dargeparse -d abdul
 Hello abdul! the time now is 2012-03-20 00:32:04.129220
+
+
+[abdul:~/objectlabs/dargparse] ./hello-dargeparse -d -r 3 abdul
+Hello abdul! the time now is 2012-03-20 00:32:05.496178
+Hello abdul! the time now is 2012-03-20 00:32:05.496178
+Hello abdul! the time now is 2012-03-20 00:32:05.496178
 
 
 [abdul:~/objectlabs/dargparse] ./hello-dargeparse -printDate abdul

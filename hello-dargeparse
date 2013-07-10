@@ -57,6 +57,18 @@ HELLO_PARSER ={
             "nargs": 0,
             "action": "store_true",
             "default": False
+        },
+        {
+            "name": "repeat",
+            "type" : "optional",
+            "help": "repeat for N times",
+            "cmd_arg": [
+                "-r",
+                "--repeat"
+            ],
+            "nargs": 1,
+            "default": 1,
+            "valueType": int,
         }
 
     ]
@@ -78,9 +90,11 @@ def main(args):
     parsed_options = helloDargParser.parse_args(args)
     now = datetime.now()
     if parsed_options.printDate:
-        print "Hello %s! the time now is %s" % (parsed_options.yourName,now)
+        msg = "Hello %s! the time now is %s" % (parsed_options.yourName,now)
     else:
-        print "Hello %s!" % (parsed_options.yourName)
+        msg = "Hello %s!" % (parsed_options.yourName)
+    print '\n'.join([msg] * parsed_options.repeat)
+
 
 ###############################################################################
 ########################                   ####################################
