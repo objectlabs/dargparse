@@ -25,7 +25,7 @@ from setuptools import setup
 
 setup(
     name='dargparse',
-    version='0.2.1',
+    version='0.2.2',
     author='The MongoLab Team',
     author_email='team@mongolab.com',
     description='Declarative command-line argument parser for python',
