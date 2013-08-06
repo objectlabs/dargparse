@@ -118,6 +118,7 @@ def make_arg_kwargs(arg_def):
     nargs = get_document_property(arg_def, "nargs")
     action = get_document_property(arg_def, "action")
     value_type = get_document_property(arg_def, "valueType")
+    required = get_document_property(arg_def, "required")
 
     if nargs is not None:
         if nargs == 0:
@@ -130,6 +131,9 @@ def make_arg_kwargs(arg_def):
 
     if value_type is not None:
         kwargs["type"] = value_type
+
+    if required is not None:
+        kwargs["required"] = required
 
     default = get_document_property(arg_def, "default")
 
@@ -224,7 +228,6 @@ class DargeParser(ArgumentParser):
             msg =  ("unrecognized arguments: %s" % argv_str +
                     "\n" + self.get_errored_parser().get_usage() +
                     "\n" + details_msg)
-
             self.error(msg)
 
         # add additional information

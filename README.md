@@ -130,6 +130,9 @@ Hello abdul! the time now is 2012-03-20 00:32:05.496178
 Hello abdul! the time now is 2012-03-20 00:32:05.496178
 Hello abdul! the time now is 2012-03-20 00:32:05.496178
 
+with "required" set on date flag:
+[abdul:~/objectlabs/dargparse] ./hello-dargeparse abdul
+argument -d/--printDate is required
 
 [abdul:~/objectlabs/dargparse] ./hello-dargeparse -printDate abdul
 unrecognized arguments: -printDate
