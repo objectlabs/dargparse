@@ -486,10 +486,12 @@ def get_document_property(document, name, default=None):
 ###############################################################################
 def resolve_function(full_func_name):
     names = full_func_name.split(".")
-    module_name = names[0]
-    module_obj = sys.modules[module_name]
+    module_name = ".".join(names[:-1])
+    module_obj = __import__(module_name)
+
     result = module_obj
     for name in names[1:]:
         result = getattr(result, name)
 
     return result
+
