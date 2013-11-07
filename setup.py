@@ -23,6 +23,14 @@
 
 from setuptools import setup
 
+# add argparse dependency as needed (when its not available)
+install_requires = []
+
+try:
+    import argparse
+except Exception, ex:
+    install_requires = ["argparse>=1.2.1"]
+
 setup(
     name='dargparse',
     version='0.2.3',
@@ -34,7 +42,5 @@ setup(
     test_suite="dargparse.tests.test_suite",
     url='https://github.com/objectlabs/dargparse',
     license='MIT',
-    install_requires=[
-        'argparse==1.2.1'
-    ]
+    install_requires=install_requires
 )
