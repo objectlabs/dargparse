@@ -119,6 +119,7 @@ def make_arg_kwargs(arg_def):
     action = get_document_property(arg_def, "action")
     value_type = get_document_property(arg_def, "valueType")
     required = get_document_property(arg_def, "required")
+    version = get_document_property(arg_def, "version")
 
     if nargs is not None:
         if nargs == 0:
@@ -134,6 +135,9 @@ def make_arg_kwargs(arg_def):
 
     if required is not None:
         kwargs["required"] = required
+
+    if version is not None:
+        kwargs["version"] = version
 
     default = get_document_property(arg_def, "default")
 
