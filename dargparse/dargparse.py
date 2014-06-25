@@ -196,7 +196,7 @@ class DargeParser(ArgumentParser):
 
         if definition_document is None:
             raise Exception("definition_document cannot be None")
-        self.__definition_document__ = definition_document
+        self._definition_document = definition_document
         self.parent_dargeparser = parent_dargeparser
         self.current_parsing_child = None
 
@@ -343,6 +343,10 @@ class DargeParser(ArgumentParser):
         if optional_actions:
             formatter._indent()
             for action in optional_actions:
+                # skip hidden options
+                arg_def = self.get_arg_definition(action.dest)
+                if arg_def and arg_def.get("hidden"):
+                    continue
                 formatter.add_argument(action)
 
             return "Options:\n%s" % formatter.format_help()
@@ -351,8 +355,8 @@ class DargeParser(ArgumentParser):
 
     ###########################################################################
     def _get_child_groups(self):
-        child_groups = get_document_property(self.__definition_document__,
-                                              "child_groups")
+        child_groups = get_document_property(self._definition_document,
+                                             "child_groups")
         if child_groups is None or len(child_groups) < 1:
             child_groups = [DEFAULT_CHILD_GROUP]
 
@@ -371,7 +375,7 @@ class DargeParser(ArgumentParser):
     ###########################################################################
     def get_child_definitions(self):
         return get_document_property(
-            self.__definition_document__,
+            self._definition_document,
             "children",
             [])
 
@@ -383,9 +387,17 @@ class DargeParser(ArgumentParser):
     ###########################################################################
     def get_arg_definitions(self):
         return get_document_property(
-            self.__definition_document__,
+            self._definition_document,
             "args",
             [])
+
+    ###########################################################################
+    def get_arg_definition(self, arg_name):
+        d = filter(
+            lambda arg_def: get_arg_name(arg_def) == arg_name,
+            self.get_arg_definitions())
+
+        return d[0] if d else None
 
     ###########################################################################
     def get_optional_args(self):
