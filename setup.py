@@ -33,7 +33,7 @@ except Exception, ex:
 
 setup(
     name='dargparse',
-    version='0.2.4',
+    version='0.2.5',
     author='The MongoLab Team',
     author_email='team@mongolab.com',
     description='Declarative command-line argument parser for python',
